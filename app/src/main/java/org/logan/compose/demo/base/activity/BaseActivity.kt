@@ -3,7 +3,6 @@ package org.logan.compose.demo.base.activity
 import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.util.Consumer
+import androidx.fragment.app.FragmentActivity
 
 /**
  * desc: activity 基类 <br/>
@@ -19,14 +19,14 @@ import androidx.core.util.Consumer
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-open class BaseActivity : ComponentActivity() {
+open class BaseActivity : FragmentActivity() {
 
 
-    fun showMsg(msg: String?) {
-        msg?.let {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        }
-    }
+//    fun showMsg(msg: String?) {
+//        msg?.let {
+//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
 }
 

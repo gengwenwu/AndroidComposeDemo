@@ -16,6 +16,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AndroidComposeDemo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +25,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.book.BookAndroidComposeActivity" />
-        <activity android:name=".ui.google.GoogleAndroidComposeActivity" />
-        <activity android:name=".ui.personal.PersonalAndroidComposeActivity" />
+        <activity
+            android:name=".ui.book.BookAndroidComposeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.google.GoogleAndroidComposeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.PersonalAndroidComposeActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 
