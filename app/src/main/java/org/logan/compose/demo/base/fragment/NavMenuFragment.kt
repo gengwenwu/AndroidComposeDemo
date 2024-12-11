@@ -1,7 +1,6 @@
 package org.logan.compose.demo.base.fragment
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -46,8 +45,8 @@ fun MenuButton(text: String, fragment: Fragment?, menuClickConsumer: ((Fragment)
     Button(
         //
         modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp)
-            .height(35.dp),
+            .padding(start = 16.dp, end = 16.dp),
+            //.height(40.dp),
         //
         onClick = {
             if (fragment == null) {
