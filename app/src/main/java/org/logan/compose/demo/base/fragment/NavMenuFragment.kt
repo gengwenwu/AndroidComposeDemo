@@ -1,5 +1,7 @@
 package org.logan.compose.demo.base.fragment
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -25,7 +27,9 @@ class NavMenuFragment(
 
     @Composable
     override fun MyFragmentView() {
-        LazyColumn() {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
             menu.forEach {
                 item {
                     MenuButton(it.key, it.value, menuClickConsumer)
@@ -39,14 +43,19 @@ class NavMenuFragment(
 fun MenuButton(text: String, fragment: Fragment?, menuClickConsumer: ((Fragment) -> Unit)? = null) {
     val context = LocalContext.current
 
-    Button(modifier = Modifier.padding(start = 16.dp, end = 16.dp), onClick = {
-        if (fragment == null) {
-            context.showMsg("该功能未实现")
-        } else {
-            menuClickConsumer?.invoke(fragment)
-        }
-    }) {
+    Button(
+        //
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .height(35.dp),
+        //
+        onClick = {
+            if (fragment == null) {
+                context.showMsg("该功能未实现")
+            } else {
+                menuClickConsumer?.invoke(fragment)
+            }
+        }) {
         Text(text = text)
     }
 }
-

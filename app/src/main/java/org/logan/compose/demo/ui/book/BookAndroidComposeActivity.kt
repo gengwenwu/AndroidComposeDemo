@@ -105,12 +105,12 @@ fun FragmentContainer(modifier: Modifier = Modifier, fragment: Fragment) {
 private fun getMenuConfigs(): Map<String, Fragment?> {
     return mapOf(
         "C2 常用UI组件" to C2_1_TestFragment(),
-        "C3 主题" to C2_2_TestFragment(),
-        "C4 状态管理与重组" to null,
-        "C5 动画" to null,
-        "C6 手势处理" to null,
-        "C7 页面导航" to null,
-        "C8 TODO" to null
+        // "C3 主题" to C2_2_TestFragment(),
+        // "C4 状态管理与重组" to null,
+        // "C5 动画" to null,
+        // "C6 手势处理" to null,
+        // "C7 页面导航" to null,
+        // "C8 TODO" to null
     )
 }
 
