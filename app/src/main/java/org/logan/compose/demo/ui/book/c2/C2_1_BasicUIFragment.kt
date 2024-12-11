@@ -65,6 +65,9 @@ fun FragmentDemoView(modifier: Modifier = Modifier) {
 
         ModifierOffsetDemo()
         Spacer(Modifier.height(5.dp))
+
+        ModifierMatchParentDemo()
+        Spacer(Modifier.height(5.dp))
     }
 }
 
@@ -73,9 +76,7 @@ fun ModifierSizeDemo(modifier: Modifier = Modifier) {
     Row {
         Image(
             // 指定图片资源
-            painterResource(id = R.drawable.ic_boy),
-            contentDescription = null,
-            modifier = Modifier
+            painterResource(id = R.drawable.ic_boy), contentDescription = null, modifier = Modifier
                 // 设置高度为80dp，宽度为50dp
                 .height(80.dp)
                 .width(50.dp)
@@ -84,9 +85,7 @@ fun ModifierSizeDemo(modifier: Modifier = Modifier) {
         Spacer(Modifier.width(10.dp))
 
         Image(
-            painterResource(id = R.drawable.ic_boy),
-            contentDescription = null,
-            modifier = Modifier
+            painterResource(id = R.drawable.ic_boy), contentDescription = null, modifier = Modifier
                 // width、height 同时设置为100dp
                 .size(100.dp)
                 .clip(CircleShape)
@@ -227,6 +226,28 @@ fun showKotlinScope() {
 }
 
 // </editor-fold>
+
+@Composable
+fun ModifierMatchParentDemo() {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            // 因为子布局的填满，所以父布局的黄色背景，并没有显示
+            .background(Color.Yellow)
+    ) {
+        Box(
+            Modifier
+                // 设置当前组件与父组件尺寸相同
+                .matchParentSize()
+                // 设置当前组件与父组件尺寸所允许的最大尺寸
+                //.fillMaxSize()
+                .background(Color.LightGray)
+        ) {
+            Text("matchParentSize 与 fillMaxSize", Modifier.align(Alignment.Center))
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
