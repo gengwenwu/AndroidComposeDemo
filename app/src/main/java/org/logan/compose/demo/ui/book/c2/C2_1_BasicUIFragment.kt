@@ -68,6 +68,9 @@ fun FragmentDemoView(modifier: Modifier = Modifier) {
 
         ModifierMatchParentDemo()
         Spacer(Modifier.height(5.dp))
+
+        ModifierWeightDemo()
+        Spacer(Modifier.height(5.dp))
     }
 }
 
@@ -245,6 +248,37 @@ fun ModifierMatchParentDemo() {
                 .background(Color.LightGray)
         ) {
             Text("matchParentSize 与 fillMaxSize", Modifier.align(Alignment.Center))
+        }
+    }
+}
+
+@Composable
+fun ModifierWeightDemo() {
+    // 在 RowScope、ColumnScope 中，可以使用专属 weight 修饰符，按照百分比设置尺寸
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Box(
+            Modifier
+                .weight(0.25f)
+                .fillMaxHeight()
+                .background(Color.Blue)
+        )
+        Box(
+            Modifier
+                .weight(0.25f)
+                .fillMaxHeight()
+                .background(Color.Yellow)
+        )
+        Box(
+            Modifier
+                .weight(0.5f)
+                .fillMaxHeight()
+                .background(Color.White)
+        ) {
+            Text("Weight 权重", Modifier.align(Alignment.Center))
         }
     }
 }
