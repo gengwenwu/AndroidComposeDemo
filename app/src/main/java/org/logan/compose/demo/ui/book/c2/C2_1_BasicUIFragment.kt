@@ -73,7 +73,7 @@ fun ModifierSizeDemo(modifier: Modifier = Modifier) {
     Row {
         Image(
             // 指定图片资源
-            painterResource(id = R.drawable.ic_basketball),
+            painterResource(id = R.drawable.ic_boy),
             contentDescription = null,
             modifier = Modifier
                 // 设置高度为80dp，宽度为50dp
@@ -84,7 +84,7 @@ fun ModifierSizeDemo(modifier: Modifier = Modifier) {
         Spacer(Modifier.width(10.dp))
 
         Image(
-            painterResource(id = R.drawable.ic_basketball),
+            painterResource(id = R.drawable.ic_boy),
             contentDescription = null,
             modifier = Modifier
                 // width、height 同时设置为100dp
