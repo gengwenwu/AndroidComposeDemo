@@ -6,17 +6,17 @@ import androidx.compose.runtime.Composable
 import org.logan.compose.demo.base.fragment.BaseFragment
 
 /**
- * desc: 第2章 第1个案例 <br/>
+ * desc: 第2章 常用基本组件 <br/>
  * time: 2024/12/10 14:46 <br/>
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_2_TestFragment : BaseFragment() {
+class C2_2_BasicUIFragment : BaseFragment() {
 
     @Composable
     override fun MyFragmentView() {
         Column() {
-            Text("这是一个测试的fragment 2")
+            Text("常用基本组件")
         }
     }
 

@@ -31,12 +31,12 @@ import org.logan.compose.demo.R
 import org.logan.compose.demo.base.fragment.BaseFragment
 
 /**
- * desc: 第2章 常用UI <br/>
+ * desc: 第2章 了解常用UI <br/>
  * time: 2024/12/10 14:43 <br/>
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_1_BasicUIFragment : BaseFragment() {
+class C2_1_KnownBasicUIFragment : BaseFragment() {
 
 
     @Composable
