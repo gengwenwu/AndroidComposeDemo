@@ -2,12 +2,16 @@ package org.logan.compose.demo.ui.book.c2
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -34,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.logan.compose.demo.R
 import org.logan.compose.demo.base.fragment.BaseFragment
+import org.logan.compose.demo.utils.extension.showMsg
 
 /**
  * desc: 第2章 常用基本组件 - 文本 <br/>
@@ -52,22 +58,29 @@ class C2_2_BasicUIFragment : BaseFragment() {
 
 @Composable
 fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
+    val scrollState = rememberScrollState()
+
     Column(
         Modifier
             .fillMaxSize()
             .padding(start = 16.dp, end = 16.dp)
+            .scrollable(state = scrollState, orientation = Orientation.Vertical)
     ) {
         TextDemoView()
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         TextMaxLinesDemoView()
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         TextFontFamilyDemoView()
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         TextAnnotatedStringDemoView()
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(12.dp))
+
+        TextClickableDemoView()
+        Spacer(modifier = Modifier.height(12.dp))
+
     }
 }
 
@@ -102,7 +115,7 @@ fun TextDemoView() {
                 "Text width: ${textLayoutResult.size.width}, lineCount:${textLayoutResult.lineCount}"
             )
         },
-        // 文本 style 配置，如颜色、字体、行高、间距、文本粗细等。
+        // 文本 style 配置(TextStyle)，如: 颜色、字体、行高、间距、文本粗细等。
         // 注意：如果同时设置了 style 和 Text 的 color、fontSize 等属性，那么 style 中同名配置会被 Text 属性覆盖掉。
         // 可通过 LocalTextStyle.current 来获取当前的文本样式，然后通过 copy() 进行修改, 并将修改后的样式传递给 Text 组件。
         style = LocalTextStyle.current.copy(
@@ -124,16 +137,16 @@ fun TextDemoView() {
 @Composable
 fun TextMaxLinesDemoView() {
     Text(
-        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
+        text = "正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
         style = MaterialTheme.typography.bodyLarge
     )
     Text(
-        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
+        text = "正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
         style = MaterialTheme.typography.bodyLarge,
         maxLines = 1
     )
     Text(
-        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
+        text = "正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
         style = MaterialTheme.typography.bodyLarge,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
@@ -142,6 +155,7 @@ fun TextMaxLinesDemoView() {
 
 @Composable
 fun TextFontFamilyDemoView() {
+    // 使用字体案例
     Text("FontFamily.Monospace", fontFamily = FontFamily.Monospace)
     Text("FontFamily.Cursive", fontFamily = FontFamily.Cursive)
     Text("FontFamily.SansSerif", fontFamily = FontFamily.SansSerif)
@@ -198,6 +212,56 @@ fun TextAnnotatedStringDemoView() {
             fontSize = 12.sp
         )
     )
+}
+
+@Composable
+fun TextClickableDemoView() {
+    val clickTextTag = "URL"
+
+    val annotationText = buildAnnotatedString {
+        withStyle(
+            style = ParagraphStyle(lineHeight = 25.sp)
+        ) {
+            append("Compose Text官方案例")
+
+            // 通过 pushStringAnnotation 方法，给文本添加一个标签，用于后续点击处理逻辑。
+            // 为 pushStringAnnotation 与 pop 之间的区域，添加标签，后续查询到该标签的文本。
+            // 设置处理事件。如：打开链接、拨打号码，等
+            pushStringAnnotation(
+                tag = clickTextTag,
+                annotation = "https://developer.android.google.cn/develop/ui/compose/text?hl=zh-cn"
+            )
+            withStyle(
+                style = SpanStyle(
+                    color = Color.Blue,
+                    fontStyle = FontStyle.Italic,
+                    textDecoration = TextDecoration.Underline
+                )
+            ) {
+                append("点击我")
+            }
+
+            // 使用 pop 方法，将标签从文本中移除
+            pop()
+
+            append("查看详情")
+        }
+    }
+
+    val context = LocalContext.current
+
+    // 可点击文本组件 ClickableText
+    ClickableText(
+        // 显示文案
+        text = annotationText,
+        // 点击事件
+        onClick = { offset ->
+            // 获取被点击区域的标签为 "URL" 的 Annotation 并进行处理
+            annotationText.getStringAnnotations(tag = clickTextTag, start = offset, end = offset)
+                .firstOrNull()?.let {
+                    context.showMsg("跳转到：${it.item}")
+                }
+        })
 }
 
 @Preview(showBackground = true)
