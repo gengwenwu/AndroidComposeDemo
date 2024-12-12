@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -81,6 +82,8 @@ fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
         TextClickableDemoView()
         Spacer(modifier = Modifier.height(12.dp))
 
+        SelectionContainerDemoView()
+        Spacer(modifier = Modifier.height(12.dp))
     }
 }
 
@@ -262,6 +265,19 @@ fun TextClickableDemoView() {
                     context.showMsg("跳转到：${it.item}")
                 }
         })
+}
+
+
+@Composable
+fun SelectionContainerDemoView() {
+    SelectionContainer {
+        // Text 组件，默认是不支持复制的，需要使用 SelectionContainer 组件包裹起来，才能支持复制
+        Text(
+            text = "我是一个可以被复制的文字",
+            color = Color.Gray,
+            style = MaterialTheme.typography.bodyLarge
+        )
+    }
 }
 
 @Preview(showBackground = true)
