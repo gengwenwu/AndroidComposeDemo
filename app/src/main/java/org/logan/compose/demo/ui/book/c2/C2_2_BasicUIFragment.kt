@@ -3,10 +3,13 @@ package org.logan.compose.demo.ui.book.c2
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -48,6 +51,9 @@ fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
             .padding(start = 16.dp, end = 16.dp)
     ) {
         TextDemoView()
+        Spacer(modifier = Modifier.height(5.dp))
+
+        TextMaxLinesDemoView()
     }
 }
 
@@ -65,8 +71,8 @@ fun TextDemoView() {
             .padding(end = 15.dp),
         color = Color.White, // 文字颜色
         fontSize = 20.sp, // 文字大小
-        fontStyle = FontStyle.Italic, // 文字样式
-        fontWeight = FontWeight.Bold, // 文字粗细
+        fontStyle = FontStyle.Italic, // 文字样式,  FontStyle.Normal
+        fontWeight = FontWeight.Bold, // 文字粗细， FontWeight.Light、FontWeight.Thin、FontWeight.W100
         fontFamily = FontFamily(Font(R.font.alibaba_heavy)), // 文本字体，使用默认的 FontFamily.Monospace
         letterSpacing = 2.5.sp, // 文本之间间距 TextUnit.Unspecified
         textDecoration = TextDecoration.Underline, // 文本的装饰，下划线、删除线等。TextDecoration.LineThrough, TextDecoration.None
@@ -82,13 +88,42 @@ fun TextDemoView() {
                 "Text width: ${textLayoutResult.size.width}, lineCount:${textLayoutResult.lineCount}"
             )
         },
-        // 文本的风格配置，如颜色、字体、行高等。
-        // 可通过 LocalTextStyle.current 来获取当前的文本样式，然后通过 copy() 进行修改, 并将修改后的样式传递给 Text 组件
+        // 文本 style 配置，如颜色、字体、行高、间距、文本粗细等。
+        // 注意：如果同时设置了 style 和 Text 的 color、fontSize 等属性，那么 style 中同名配置会被 Text 属性覆盖掉。
+        // 可通过 LocalTextStyle.current 来获取当前的文本样式，然后通过 copy() 进行修改, 并将修改后的样式传递给 Text 组件。
         style = LocalTextStyle.current.copy(
-            textAlign = TextAlign.Center, fontSize = 25.sp, color = Color.Red
+            // 这些属性不起作用，因为上面属性已经设置，会覆盖下面的配置。
+            color = Color.Red, fontSize = 40.sp, textAlign = TextAlign.Center
         )
     )
 
+    Text(
+        text = "Hello World, Goodbye World!",
+        modifier = Modifier.fillMaxWidth(),
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.LineThrough,
+        // 使用 Material3 内设的文本样式: titleMedium、titleSmall、bodyLarge、bodyMedium、bodySmall 等
+        style = MaterialTheme.typography.titleLarge
+    )
+}
+
+@Composable
+fun TextMaxLinesDemoView() {
+    Text(
+        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！",
+        style = MaterialTheme.typography.bodyLarge
+    )
+    Text(
+        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！",
+        style = MaterialTheme.typography.bodyLarge,
+        maxLines = 1
+    )
+    Text(
+        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！",
+        style = MaterialTheme.typography.bodyLarge,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
 }
 
 @Preview(showBackground = true)
