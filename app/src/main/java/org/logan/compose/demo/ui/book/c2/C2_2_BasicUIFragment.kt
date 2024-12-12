@@ -152,46 +152,52 @@ fun TextFontFamilyDemoView() {
 @Composable
 fun TextAnnotatedStringDemoView() {
     // AnnotatedString, 是一个可组合的文本对象，它可以在文本中应用样式和格式，使用 SpanStyle、ParagraphStyle 等对象来处理样式和格式
-    Text(text = buildAnnotatedString {
-        // 使用 withStyle 方法来应用样式。参数 SpanStyle 可以处理文字样式，如：颜色、字体、大小、粗细、背景等
-        withStyle(
-            style = SpanStyle(
-                fontSize = 18.sp, background = Color.Yellow, shadow = Shadow(
-                    color = Color.Blue, offset = Offset.Zero, blurRadius = 25f
-                )
-            )
-        ) {
-            // 使用 append 添加显示文案
-            append("你现在看的章节是")
-        }
-
-        withStyle(
-            style = SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.W900, color = Color.Red)
-        ) {
-            append("Text")
-        }
-
-        // 参数 ParagraphStyle 可以处理段落样式，设置文字的行高、对齐方式、缩进等。
-        withStyle(
-            style = ParagraphStyle(
-                // 对齐方式
-                textAlign = TextAlign.Start,
-                // 行高
-                lineHeight = 25.sp,
-                // 缩进。firstLine 表示第一行的缩进，restLine 表示其他行的缩进。
-                textIndent = TextIndent(firstLine = 25.sp, restLine = 5.sp)
-            )
-        ) {
-            append("在刚刚讲过的内容中，我们学习了如何应用文字样式，以及如何限制文本的行数和处理溢出的视觉效果。\n")
-            // 嵌套 withStyle
+    Text(
+        text = buildAnnotatedString {
+            // 使用 withStyle 方法来应用样式。参数 SpanStyle 可以处理文字样式，如：颜色、字体、大小、粗细、背景等
             withStyle(
-                style = SpanStyle(fontWeight = FontWeight.W900, color = Color(0xFF59A869))
+                style = SpanStyle(
+                    fontSize = 18.sp, background = Color.Yellow, shadow = Shadow(
+                        color = Color.Blue, offset = Offset.Zero, blurRadius = 25f
+                    )
+                )
             ) {
-                append("AnnotatedString")
+                // 使用 append 添加显示文案
+                append("你现在看的章节是")
             }
-            append("是Compose处理文案技术，替代传统View SpanString。")
-        }
-    })
+
+            withStyle(
+                style = SpanStyle(fontSize = 25.sp, fontWeight = FontWeight.W900, color = Color.Red)
+            ) {
+                append("Text")
+            }
+
+            // 参数 ParagraphStyle 可以处理段落样式，设置文字的行高、对齐方式、缩进等。
+            withStyle(
+                style = ParagraphStyle(
+                    // 对齐方式
+                    textAlign = TextAlign.Start,
+                    // 行高
+                    lineHeight = 25.sp,
+                    // 缩进。firstLine 表示第一行的缩进，restLine 表示其他行的缩进。
+                    textIndent = TextIndent(firstLine = 25.sp, restLine = 5.sp)
+                )
+            ) {
+                append("在刚刚讲过的内容中，我们学习了如何应用文字样式，以及如何限制文本的行数和处理溢出的视觉效果。\n")
+                // 嵌套 withStyle
+                withStyle(
+                    style = SpanStyle(fontWeight = FontWeight.W900, color = Color(0xFF59A869))
+                ) {
+                    append("AnnotatedString")
+                }
+                append("是Compose处理文案技术，替代传统View SpanString。")
+            }
+        }, style = LocalTextStyle.current.copy(
+            // SpanStyle 或 ParagraphStyle 中的优先级高于 TextStyle 中的同名属性配置。
+            // 下面 fontSize = 12.sp，在上面部分已经设置了 fontSize 后，就无效了 ，如：“你现在看的章节是Text” 文字的大小
+            fontSize = 12.sp
+        )
+    )
 }
 
 @Preview(showBackground = true)
