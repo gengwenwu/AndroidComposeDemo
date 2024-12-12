@@ -10,18 +10,31 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -83,6 +96,9 @@ fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(12.dp))
 
         SelectionContainerDemoView()
+        Spacer(modifier = Modifier.height(12.dp))
+
+        TextFieldDemoView()
         Spacer(modifier = Modifier.height(12.dp))
     }
 }
@@ -273,12 +289,52 @@ fun SelectionContainerDemoView() {
     SelectionContainer {
         // Text 组件，默认是不支持复制的，需要使用 SelectionContainer 组件包裹起来，才能支持复制
         Text(
-            text = "我是一个可以被复制的文字",
+            text = "这是一个长按可以被复制的文字",
             color = Color.Gray,
             style = MaterialTheme.typography.bodyLarge
         )
     }
 }
+
+@Composable
+fun TextFieldDemoView() {
+    var userName by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    TextField(value = userName, onValueChange = {
+        // 输入变更，通知 view 刷新
+        userName = it
+    }, label = {  // 输入框的标签
+        Text(text = "用户名")
+    }, placeholder = { // 输入框的占位符
+        Text(text = "请输入用户名")
+    }, leadingIcon = { // 输入框前图标
+        // icon 图标 (使用系统)
+        Icon(imageVector = Icons.Filled.AccountBox, contentDescription = null)
+    })
+
+    TextField(value = password, onValueChange = {
+        password = it
+    }, label = {
+        Text(text = "密码")
+    }, placeholder = {
+        Text(text = "请输入密码")
+    }, leadingIcon = {  // 输入框前图标
+        Icon( // 使用自定义
+            painter = painterResource(R.drawable.ic_login_lock),
+            contentDescription = null,
+            modifier = Modifier.size(25.dp)
+        )
+    }, trailingIcon = {  // 输入框后图标，既：X按钮
+        IconButton(onClick = {
+            password = "" // 清空密码
+        }) {
+            Icon(imageVector = Icons.Filled.Clear, contentDescription = null)
+        }
+    }, maxLines = 1)
+
+}
+
 
 @Preview(showBackground = true)
 @Composable
