@@ -51,9 +51,13 @@ fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
             .padding(start = 16.dp, end = 16.dp)
     ) {
         TextDemoView()
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         TextMaxLinesDemoView()
+        Spacer(modifier = Modifier.height(8.dp))
+
+        TextFontFamilyDemoView()
+        Spacer(modifier = Modifier.height(8.dp))
     }
 }
 
@@ -110,20 +114,29 @@ fun TextDemoView() {
 @Composable
 fun TextMaxLinesDemoView() {
     Text(
-        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！",
+        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
         style = MaterialTheme.typography.bodyLarge
     )
     Text(
-        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！",
+        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
         style = MaterialTheme.typography.bodyLarge,
         maxLines = 1
     )
     Text(
-        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！",
+        text = "Hello Wolrd！正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
         style = MaterialTheme.typography.bodyLarge,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )
+}
+
+@Composable
+fun TextFontFamilyDemoView() {
+    Text("FontFamily.Monospace", fontFamily = FontFamily.Monospace)
+    Text("FontFamily.Cursive", fontFamily = FontFamily.Cursive)
+    Text("FontFamily.SansSerif", fontFamily = FontFamily.SansSerif)
+    Text("FontFamily.Serif", fontFamily = FontFamily.Serif)
+    Text("res/font/alibaba_heavy", fontFamily = FontFamily(Font(R.font.alibaba_heavy)))
 }
 
 @Preview(showBackground = true)
