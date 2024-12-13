@@ -2,26 +2,23 @@ package org.logan.compose.demo.ui.book.c2
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -72,34 +69,52 @@ class C2_2_BasicUIFragment : BaseFragment() {
 
 @Composable
 fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
-    val scrollState = rememberScrollState()
-
-    Column(
+    // val scrollState = rememberScrollState()
+    LazyColumn(
         Modifier
             .fillMaxSize()
             .padding(start = 16.dp, end = 16.dp)
-            .scrollable(state = scrollState, orientation = Orientation.Vertical)
+        //.scrollable(state = scrollState, orientation = Orientation.Vertical)
     ) {
-        TextDemoView()
-        Spacer(modifier = Modifier.height(12.dp))
+        item {
+            TextDemoView()
+            Spacer(modifier = Modifier.height(12.dp))
+        }
 
-        TextMaxLinesDemoView()
-        Spacer(modifier = Modifier.height(12.dp))
+        item {
+            TextMaxLinesDemoView()
+            Spacer(modifier = Modifier.height(12.dp))
+        }
 
-        TextFontFamilyDemoView()
-        Spacer(modifier = Modifier.height(12.dp))
+        item {
+            TextFontFamilyDemoView()
+            Spacer(modifier = Modifier.height(12.dp))
+        }
 
-        TextAnnotatedStringDemoView()
-        Spacer(modifier = Modifier.height(12.dp))
+        item {
+            TextAnnotatedStringDemoView()
+            Spacer(modifier = Modifier.height(12.dp))
+        }
 
-        TextClickableDemoView()
-        Spacer(modifier = Modifier.height(12.dp))
+        item {
+            TextClickableDemoView()
+            Spacer(modifier = Modifier.height(12.dp))
+        }
 
-        SelectionContainerDemoView()
-        Spacer(modifier = Modifier.height(12.dp))
+        item {
+            SelectionContainerDemoView()
+            Spacer(modifier = Modifier.height(12.dp))
+        }
 
-        TextFieldDemoView()
-        Spacer(modifier = Modifier.height(12.dp))
+        item {
+            TextFieldDemoView()
+            Spacer(modifier = Modifier.height(12.dp))
+        }
+
+        item {
+            OutlinedTextFieldDemoView()
+            Spacer(modifier = Modifier.height(102.dp))
+        }
     }
 }
 
@@ -335,6 +350,19 @@ fun TextFieldDemoView() {
 
 }
 
+
+@Composable
+fun OutlinedTextFieldDemoView() {
+    var text by remember { mutableStateOf("") }
+
+    OutlinedTextField(value = text, onValueChange = {
+        text = it
+    }, label = {
+        Text(text = "用户名")
+    }, placeholder = {
+        Text(text = "请输入用户名")
+    })
+}
 
 @Preview(showBackground = true)
 @Composable
