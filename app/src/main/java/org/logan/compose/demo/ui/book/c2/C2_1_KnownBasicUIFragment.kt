@@ -54,28 +54,28 @@ fun FragmentDemoView(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(start = 16.dp, end = 16.dp)
     ) {
-        ModifierSizeDemo(modifier)
+        ModifierSizeSample(modifier)
         Spacer(Modifier.height(5.dp))
 
-        ModifierBackgroundDemo()
+        ModifierBackgroundSample()
         Spacer(Modifier.height(5.dp))
 
-        ModifierBorderPaddingDemo()
+        ModifierBorderPaddingSample()
         Spacer(Modifier.height(5.dp))
 
-        ModifierOffsetDemo()
+        ModifierOffsetSample()
         Spacer(Modifier.height(5.dp))
 
-        ModifierMatchParentDemo()
+        ModifierMatchParentSample()
         Spacer(Modifier.height(5.dp))
 
-        ModifierWeightDemo()
+        ModifierWeightSample()
         Spacer(Modifier.height(5.dp))
     }
 }
 
 @Composable
-fun ModifierSizeDemo(modifier: Modifier = Modifier) {
+fun ModifierSizeSample(modifier: Modifier = Modifier) {
     Row {
         Image(
             // 指定图片资源
@@ -97,7 +97,7 @@ fun ModifierSizeDemo(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ModifierBackgroundDemo() {
+fun ModifierBackgroundSample() {
     // 注意：传统View，background 能够设置 背景色 和 背景图片，
     // 而 Compose 的 background 只能设置颜色。 图片背景，需要使用 Box布局配合 Image 组合实现。
     val verticalGradientBrush = Brush.verticalGradient(
@@ -129,7 +129,7 @@ fun ModifierBackgroundDemo() {
 }
 
 @Composable
-fun ModifierFillDemo() {
+fun ModifierFillSample() {
     Box(
         Modifier
             // 填充整个父布局(宽和高)
@@ -155,7 +155,7 @@ fun ModifierFillDemo() {
 }
 
 @Composable
-fun ModifierBorderPaddingDemo() {
+fun ModifierBorderPaddingSample() {
     // 注意：传统View，有 margin 和 padding 之分，Compose 中只有 padding 这一种修饰符
     Box(
         modifier = Modifier
@@ -174,7 +174,7 @@ fun ModifierBorderPaddingDemo() {
 }
 
 @Composable
-fun ModifierOffsetDemo() {
+fun ModifierOffsetSample() {
     // Modifier offset 修饰符用来移动被修饰组件的位置（水平、垂直方向）
     // 注意：Modifier 调用顺序会影响最终UI呈现的效果
     Box(
@@ -231,7 +231,7 @@ fun showKotlinScope() {
 // </editor-fold>
 
 @Composable
-fun ModifierMatchParentDemo() {
+fun ModifierMatchParentSample() {
     Box(
         Modifier
             .fillMaxWidth()
@@ -253,7 +253,7 @@ fun ModifierMatchParentDemo() {
 }
 
 @Composable
-fun ModifierWeightDemo() {
+fun ModifierWeightSample() {
     // 在 RowScope、ColumnScope 中，可以使用专属 weight 修饰符，按照百分比设置尺寸
     Row(
         Modifier

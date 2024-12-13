@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
@@ -77,49 +78,54 @@ fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
         //.scrollable(state = scrollState, orientation = Orientation.Vertical)
     ) {
         item {
-            TextDemoView()
+            TextSample()
             Spacer(modifier = Modifier.height(12.dp))
         }
 
         item {
-            TextMaxLinesDemoView()
+            TextMaxLinesSample()
             Spacer(modifier = Modifier.height(12.dp))
         }
 
         item {
-            TextFontFamilyDemoView()
+            TextFontFamilySample()
             Spacer(modifier = Modifier.height(12.dp))
         }
 
         item {
-            TextAnnotatedStringDemoView()
+            TextAnnotatedStringSample()
             Spacer(modifier = Modifier.height(12.dp))
         }
 
         item {
-            TextClickableDemoView()
+            TextClickableSample()
             Spacer(modifier = Modifier.height(12.dp))
         }
 
         item {
-            SelectionContainerDemoView()
+            SelectionContainerSample()
             Spacer(modifier = Modifier.height(12.dp))
         }
 
         item {
-            TextFieldDemoView()
+            TextFieldSample()
             Spacer(modifier = Modifier.height(12.dp))
         }
 
         item {
-            OutlinedTextFieldDemoView()
+            OutlinedTextFieldSample()
+            Spacer(modifier = Modifier.height(102.dp))
+        }
+
+        item {
+            BasicTextFileSample()
             Spacer(modifier = Modifier.height(102.dp))
         }
     }
 }
 
 @Composable
-fun TextDemoView() {
+fun TextSample() {
     // 指定字符串
     Text(text = "Hello World!")
 
@@ -169,7 +175,7 @@ fun TextDemoView() {
 }
 
 @Composable
-fun TextMaxLinesDemoView() {
+fun TextMaxLinesSample() {
     Text(
         text = "正在使用 Jetpack Compose 构建 Android 界面！超长文本案例",
         style = MaterialTheme.typography.bodyLarge
@@ -188,7 +194,7 @@ fun TextMaxLinesDemoView() {
 }
 
 @Composable
-fun TextFontFamilyDemoView() {
+fun TextFontFamilySample() {
     // 使用字体案例
     Text("FontFamily.Monospace", fontFamily = FontFamily.Monospace)
     Text("FontFamily.Cursive", fontFamily = FontFamily.Cursive)
@@ -198,7 +204,7 @@ fun TextFontFamilyDemoView() {
 }
 
 @Composable
-fun TextAnnotatedStringDemoView() {
+fun TextAnnotatedStringSample() {
     // AnnotatedString, 是一个可组合的文本对象，它可以在文本中应用样式和格式，使用 SpanStyle、ParagraphStyle 等对象来处理样式和格式
     Text(
         text = buildAnnotatedString {
@@ -249,7 +255,7 @@ fun TextAnnotatedStringDemoView() {
 }
 
 @Composable
-fun TextClickableDemoView() {
+fun TextClickableSample() {
     val clickTextTag = "URL"
 
     val annotationText = buildAnnotatedString {
@@ -300,7 +306,7 @@ fun TextClickableDemoView() {
 
 
 @Composable
-fun SelectionContainerDemoView() {
+fun SelectionContainerSample() {
     SelectionContainer {
         // Text 组件，默认是不支持复制的，需要使用 SelectionContainer 组件包裹起来，才能支持复制
         Text(
@@ -312,7 +318,7 @@ fun SelectionContainerDemoView() {
 }
 
 @Composable
-fun TextFieldDemoView() {
+fun TextFieldSample() {
     var userName by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -326,7 +332,8 @@ fun TextFieldDemoView() {
     }, leadingIcon = { // 输入框前图标
         // icon 图标 (使用系统)
         Icon(imageVector = Icons.Filled.AccountBox, contentDescription = null)
-    })
+    } // , modifier = Modifier.height(30.dp)
+    )
 
     TextField(value = password, onValueChange = {
         password = it
@@ -352,7 +359,7 @@ fun TextFieldDemoView() {
 
 
 @Composable
-fun OutlinedTextFieldDemoView() {
+fun OutlinedTextFieldSample() {
     var text by remember { mutableStateOf("") }
 
     OutlinedTextField(value = text, onValueChange = {
@@ -361,6 +368,13 @@ fun OutlinedTextFieldDemoView() {
         Text(text = "用户名")
     }, placeholder = {
         Text(text = "请输入用户名")
+    })
+}
+
+@Composable
+fun BasicTextFileSample() {
+    BasicTextField(value = "", onValueChange = {
+
     })
 }
 
