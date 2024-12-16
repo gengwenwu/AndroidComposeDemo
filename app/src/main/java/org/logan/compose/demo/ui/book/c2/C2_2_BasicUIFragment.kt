@@ -2,6 +2,7 @@ package org.logan.compose.demo.ui.book.c2
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +16,7 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -114,12 +116,12 @@ fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
 
         item {
             OutlinedTextFieldSample()
-            Spacer(modifier = Modifier.height(102.dp))
+            Spacer(modifier = Modifier.height(12.dp))
         }
 
         item {
             BasicTextFileSample()
-            Spacer(modifier = Modifier.height(102.dp))
+            Spacer(modifier = Modifier.height(30.dp))
         }
     }
 }
@@ -373,9 +375,25 @@ fun OutlinedTextFieldSample() {
 
 @Composable
 fun BasicTextFileSample() {
-    BasicTextField(value = "", onValueChange = {
+    // BasicTextField 支持更多的定制， 它的参数 与 TextField 的有很多共同地方。
+    // 关键参数在于 decorationBox， 它也是 Composable 类型，可以用于自定义输入框的样式。
 
-    })
+    var text by remember { mutableStateOf("") }
+    BasicTextField(value = text, onValueChange = {
+        text = it
+    },
+        //  通过 decorationBox 自定义输入框的样式。这是 BasicTextField 基本用法。
+        decorationBox = { innerTextField ->
+            Column {
+                // 输入框
+                innerTextField()
+                // 分割线
+                HorizontalDivider(
+                    thickness = 2.dp, color = Color.Red
+                )
+            }
+        })
+
 }
 
 @Preview(showBackground = true)
