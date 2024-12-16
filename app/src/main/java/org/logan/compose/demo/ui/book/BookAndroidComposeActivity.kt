@@ -106,8 +106,8 @@ fun FragmentContainer(modifier: Modifier = Modifier, fragment: Fragment) {
 private fun getMenuConfigs(): Map<String, Fragment?> {
     return mapOf(
         "2.1 Modifier组件属性" to C2_1_ComposeModifierPropertyFragment(),
-        "2.2 文本组件" to C2_2_1_ComposeTextFragment(),
-        "2.2 图片组件" to C2_2_2_ComposeImageFragment(),
+        "2.2.1 文本组件" to C2_2_1_ComposeTextFragment(),
+        "2.2.2 图片组件" to C2_2_2_ComposeImageFragment(),
         // "C5 动画" to null,
         // "C6 手势处理" to null,
         // "C7 页面导航" to null,
