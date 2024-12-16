@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -43,6 +44,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -435,8 +437,33 @@ fun SearchBarSample() {
                     Icon(
                         imageVector = Icons.Filled.Search, contentDescription = null
                     )
-                    // 输入框
-                    innerTextField()
+
+                    // 添加 placeholder
+                    Box(
+                        //  使用 Modifier.weight(1f) 来让其它组件占据剩余的空间
+                        modifier = Modifier.weight(1f), contentAlignment = Alignment.CenterStart
+                    ) {
+                        if (text.isEmpty()) {
+                            Text(
+                                text = "输入点东西看看吧~", style = TextStyle(
+                                    color = Color(0, 0, 0, 128)
+                                )
+                            )
+                        }
+                        // 输入框
+                        innerTextField()
+                    }
+
+                    // 清空按钮
+                    if (text.isNotEmpty()) {
+                        IconButton(onClick = {
+                            text = ""
+                        }) {
+                            Icon(
+                                imageVector = Icons.Filled.Close, contentDescription = null
+                            )
+                        }
+                    }
                 }
             })
     }
