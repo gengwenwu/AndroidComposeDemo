@@ -68,17 +68,24 @@ import org.logan.compose.demo.utils.extension.showMsg
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_2_ComposeTextFragment : BaseFragment() {
+class C2_2_1_ComposeTextFragment : BaseFragment() {
 
     @Composable
     override fun MyFragmentView() {
-        C2_2_BasicUIFragmentDemoView()
+        C2_2_1_ComposeTextSample()
     }
 
 }
 
+@Preview(showBackground = true)
 @Composable
-fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
+fun C2_2_1_ComposeTextSamplePreview() {
+    C2_2_1_ComposeTextSample()
+}
+
+
+@Composable
+fun C2_2_1_ComposeTextSample(modifier: Modifier = Modifier) {
     // val scrollState = rememberScrollState()
     LazyColumn(
         Modifier
@@ -469,10 +476,5 @@ fun SearchBarSample() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun C2_2_BasicUIFragmentDemoViewPreview() {
-    C2_2_BasicUIFragmentDemoView()
-}
 
 

@@ -38,16 +38,21 @@ import org.logan.compose.demo.base.fragment.BaseFragment
  */
 class C2_1_ComposeModifierPropertyFragment : BaseFragment() {
 
-
     @Composable
     override fun MyFragmentView() {
-        FragmentDemoView()
+        C2_1_ComposeModifierPropertySample()
     }
+
 }
 
+@Preview(showBackground = true)
+@Composable
+fun C2_1_ComposeModifierPropertySamplePreview() {
+    C2_1_ComposeModifierPropertySample()
+}
 
 @Composable
-fun FragmentDemoView(modifier: Modifier = Modifier) {
+fun C2_1_ComposeModifierPropertySample(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             // 填充整个父布局(宽和高)
@@ -283,8 +288,3 @@ fun ModifierWeightSample() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ViewPreview() {
-    FragmentDemoView()
-}
