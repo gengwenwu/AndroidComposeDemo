@@ -20,8 +20,8 @@ import org.logan.compose.demo.R
 import org.logan.compose.demo.base.activity.BaseActivity
 import org.logan.compose.demo.base.activity.FillTopBarModifier
 import org.logan.compose.demo.base.fragment.NavMenuFragment
-import org.logan.compose.demo.ui.book.c2.C2_1_KnownBasicUIFragment
-import org.logan.compose.demo.ui.book.c2.C2_2_BasicUIFragment
+import org.logan.compose.demo.ui.book.c2.C2_1_ComposeModifierPropertyFragment
+import org.logan.compose.demo.ui.book.c2.C2_2_ComposeTextFragment
 import org.logan.compose.demo.ui.theme.AndroidComposeDemoTheme
 
 /**
@@ -104,8 +104,8 @@ fun FragmentContainer(modifier: Modifier = Modifier, fragment: Fragment) {
 
 private fun getMenuConfigs(): Map<String, Fragment?> {
     return mapOf(
-        "2.1 了解常用UI组件" to C2_1_KnownBasicUIFragment(),
-        "2.2 常用基本组件" to C2_2_BasicUIFragment(),
+        "2.1 Modifier组件属性" to C2_1_ComposeModifierPropertyFragment(),
+        "2.2 文本组件" to C2_2_ComposeTextFragment(),
         // "C4 状态管理与重组" to null,
         // "C5 动画" to null,
         // "C6 手势处理" to null,

@@ -68,7 +68,7 @@ import org.logan.compose.demo.utils.extension.showMsg
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_2_BasicUIFragment : BaseFragment() {
+class C2_2_ComposeTextFragment : BaseFragment() {
 
     @Composable
     override fun MyFragmentView() {
@@ -133,7 +133,7 @@ fun C2_2_BasicUIFragmentDemoView(modifier: Modifier = Modifier) {
 
         item {
             SearchBarSample()
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(32.dp))
         }
 
     }
