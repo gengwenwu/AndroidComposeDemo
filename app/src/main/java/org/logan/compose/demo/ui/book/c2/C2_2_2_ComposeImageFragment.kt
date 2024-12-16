@@ -1,11 +1,13 @@
 package org.logan.compose.demo.ui.book.c2
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -20,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
@@ -63,6 +66,10 @@ fun C2_2_2_ComposeImageSample(modifier: Modifier = Modifier) {
         item {
             IconSupportTypeSample()
             Spacer(modifier = Modifier.height(10.dp))
+        }
+        item {
+            ImageSample()
+            Spacer(modifier = Modifier.height(.10.dp))
         }
     }
 }
@@ -132,6 +139,41 @@ fun IconSupportTypeSample() {
             modifier = Modifier.weight(1f),
             // 修改背景色
             tint = Color.Red
+        )
+    }
+}
+
+@Composable
+fun ImageSample() {
+    // image 显示图片，它也支持三种不同类型的图片设置 (imageVector、bitmap、painter)
+    Row(
+        modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
+    ) {
+        // svg
+        Image(
+            imageVector = ImageVector.vectorResource(R.drawable.ic_error),
+            contentDescription = null,
+            modifier = Modifier.weight(1f)
+        )
+
+        // jpg、png
+        Image(
+            bitmap = ImageBitmap.imageResource(R.drawable.ic_battery),
+            contentDescription = null,
+            modifier = Modifier.weight(1f)
+        )
+
+        // 自定义画笔
+        Image(
+            painter = painterResource(R.drawable.ic_boy),
+            contentDescription = null,
+            modifier = Modifier
+                .size(50.dp)
+                .weight(1f),
+            // 对其方式
+            alignment = Alignment.CenterEnd,
+            // 图片裁剪方式，7种，Crop 类似于 ScaleType.centerCrop
+            contentScale = ContentScale.Crop
         )
     }
 }
