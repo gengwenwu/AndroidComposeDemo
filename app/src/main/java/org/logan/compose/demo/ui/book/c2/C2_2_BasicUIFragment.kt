@@ -196,11 +196,11 @@ fun TextMaxLinesSample() {
 @Composable
 fun TextFontFamilySample() {
     // 使用字体案例
-    Text("FontFamily.Monospace", fontFamily = FontFamily.Monospace)
-    Text("FontFamily.Cursive", fontFamily = FontFamily.Cursive)
-    Text("FontFamily.SansSerif", fontFamily = FontFamily.SansSerif)
-    Text("FontFamily.Serif", fontFamily = FontFamily.Serif)
-    Text("res/font/alibaba_heavy", fontFamily = FontFamily(Font(R.font.alibaba_heavy)))
+    Text("FontFamily.Monospace 字体", fontFamily = FontFamily.Monospace)
+    Text("FontFamily.Cursive 字体", fontFamily = FontFamily.Cursive)
+    Text("FontFamily.SansSerif 字体", fontFamily = FontFamily.SansSerif)
+    Text("FontFamily.Serif 字体", fontFamily = FontFamily.Serif)
+    Text("res/font/alibaba_heavy 字体", fontFamily = FontFamily(Font(R.font.alibaba_heavy)))
 }
 
 @Composable
