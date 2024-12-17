@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,9 +12,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -53,12 +56,11 @@ fun C2_2_3_ComposeButtonSample(modifier: Modifier = Modifier) {
             .fillMaxSize()
     ) {
         ButtonSample()
-        // Spacer(modifier.height(8.dp))
-
         InteractionSourceButtonSample()
+        IconButtonSample()
+        FloatingActionButton()
     }
 }
-
 
 @Composable
 fun ButtonSample() {
@@ -106,4 +108,25 @@ fun InteractionSourceButtonSample() {
     }
 
 }
+
+
+@Composable
+fun IconButtonSample() {
+    // IconButton 实际上是 Button 组件简单的封装，在 IconButton 提供了一个图标组件， 图标尺寸一般 24 * 24dp。
+    IconButton(onClick = {
+
+    }) {
+        Icon(imageVector = Icons.Filled.Favorite, contentDescription = null)
+    }
+}
+
+
+@Composable
+fun FloatingActionButton() {
+    Row() {
+
+    }
+}
+
+
 
