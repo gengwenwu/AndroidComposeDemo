@@ -23,6 +23,7 @@ import org.logan.compose.demo.base.fragment.NavMenuFragment
 import org.logan.compose.demo.ui.book.c2.C2_1_ComposeModifierPropertyFragment
 import org.logan.compose.demo.ui.book.c2.C2_2_1_ComposeTextFragment
 import org.logan.compose.demo.ui.book.c2.C2_2_2_ComposeImageFragment
+import org.logan.compose.demo.ui.book.c2.C2_2_3_ComposeButtonFragment
 import org.logan.compose.demo.ui.theme.AndroidComposeDemoTheme
 
 /**
@@ -105,9 +106,10 @@ fun FragmentContainer(modifier: Modifier = Modifier, fragment: Fragment) {
 
 private fun getMenuConfigs(): Map<String, Fragment?> {
     return mapOf(
-        "2.1 Modifier组件属性" to C2_1_ComposeModifierPropertyFragment(),
-        "2.2.1 文本组件" to C2_2_1_ComposeTextFragment(),
-        "2.2.2 图片组件" to C2_2_2_ComposeImageFragment(),
+        "2.1 Modifier属性" to C2_1_ComposeModifierPropertyFragment(),
+        "2.2.1 文本" to C2_2_1_ComposeTextFragment(),
+        "2.2.2 图片" to C2_2_2_ComposeImageFragment(),
+        "2.2.3 Button" to C2_2_3_ComposeButtonFragment(),
         // "C5 动画" to null,
         // "C6 手势处理" to null,
         // "C7 页面导航" to null,
