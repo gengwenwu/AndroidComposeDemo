@@ -11,15 +11,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeFloatingActionButton
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,7 +47,6 @@ class C2_2_3_ComposeButtonFragment : BaseFragment() {
 
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun C2_2_3_ComposeButtonSamplePreview() {
@@ -58,7 +63,7 @@ fun C2_2_3_ComposeButtonSample(modifier: Modifier = Modifier) {
         ButtonSample()
         InteractionSourceButtonSample()
         IconButtonSample()
-        FloatingActionButton()
+        FloatingActionButtonSample()
     }
 }
 
@@ -98,8 +103,8 @@ fun InteractionSourceButtonSample() {
             // Button 并非唯一可点击组件，理论上任何 Composable组件都可以通过 Modifier.clickable 实现点击。
             // 而当 Button 被点击后,需要额外进行一些事件响应处理, 比如水波纹等, 这是其内部通过拦截 Modifier.clickable 事件实现的处理,
             // 由于 Modifier.clickable 已经被内部实现所占用, Button 需要提供单独的 onClick 参数供开发者使用。
-            //  注意: Button 的 onClick 在底层是通过覆盖 Modifier.clickable 实现的，所以不要为 Button 设置 Modifier.clickable
-            //  即使设置了, 也会因为被 onClick 覆盖而没有任何效果。
+            // 注意: Button 的 onClick 在底层是通过覆盖 Modifier.clickable 实现的，所以不要为 Button 设置 Modifier.clickable
+            // 即使设置了, 也会因为被 onClick 覆盖而没有任何效果。
         }, border = BorderStroke(2.dp, borderColor),
         // 监听组件状态事件
         interactionSource = interactionSource
@@ -108,7 +113,6 @@ fun InteractionSourceButtonSample() {
     }
 
 }
-
 
 @Composable
 fun IconButtonSample() {
@@ -120,13 +124,49 @@ fun IconButtonSample() {
     }
 }
 
-
 @Composable
-fun FloatingActionButton() {
-    Row() {
+fun FloatingActionButtonSample() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        // 1，普通大小 FloatingActionButton（简称FAB） 悬浮按钮，它也需要提供一个 Icon 组件。
+        //  最主要3个属性：
+        FloatingActionButton(
+            // 点击事件
+            onClick = {
 
+            },
+            // 容器颜色
+            containerColor = Color.LightGray,
+            // 内容颜色
+            contentColor = Color.Blue
+        ) {
+            Icon(imageVector = Icons.Filled.Add, contentDescription = null)
+        }
+        Spacer(Modifier.width(10.dp))
+
+        // 小型FAB
+        SmallFloatingActionButton(onClick = {
+
+        }) {
+            Icon(imageVector = Icons.Filled.Add, contentDescription = null)
+        }
+        Spacer(Modifier.width(10.dp))
+
+        // 大型 FAB
+        LargeFloatingActionButton(onClick = {
+
+        }) {
+            Icon(imageVector = Icons.Filled.Add, contentDescription = null)
+        }
+        Spacer(Modifier.width(10.dp))
+
+        // 文案扩展 FAB
+        ExtendedFloatingActionButton(
+            onClick = {},
+            // 文案
+            text = { Text("添加") },
+            icon = { Icon(imageVector = Icons.Filled.Add, contentDescription = null) },
+        )
     }
 }
-
 
 
