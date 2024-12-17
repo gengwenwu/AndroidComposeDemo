@@ -6,9 +6,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.Composable
@@ -55,7 +61,9 @@ fun C2_2_4_ComposeCheckboxSample(modifier: Modifier = Modifier) {
         TriStateCheckboxSample()
 
         Spacer(Modifier.height(10.dp))
+
         TriStateCheckboxSample2()
+        SwitchSample()
     }
 }
 
@@ -116,16 +124,13 @@ fun TriStateCheckboxSample2() {
 
     Row {
         Text("Select all", modifier = Modifier.align(Alignment.CenterVertically))
-        TriStateCheckbox(
-            state = parentState,
-            onClick = {
-                val newState = (parentState != ToggleableState.On)
-                childCheckedStates.forEachIndexed { index, _ ->
-                    // 统一修改 CheckBox 的 checked，变更选择状态。该方式，不会导致 onCheckedChange() 函数执行
-                    childCheckedStates[index] = newState
-                }
+        TriStateCheckbox(state = parentState, onClick = {
+            val newState = (parentState != ToggleableState.On)
+            childCheckedStates.forEachIndexed { index, _ ->
+                // 统一修改 CheckBox 的 checked，变更选择状态。该方式，不会导致 onCheckedChange() 函数执行
+                childCheckedStates[index] = newState
             }
-        )
+        })
     }
 
     childCheckedStates.forEachIndexed { index, checked ->
@@ -141,3 +146,43 @@ fun TriStateCheckboxSample2() {
     }
 
 }
+
+@Composable
+fun SwitchSample() {
+    Row() {
+        // 1，简单 switch
+        val state = remember { mutableStateOf(false) }
+        Switch(checked = state.value, onCheckedChange = { state.value = it })
+
+        Spacer(modifier = Modifier.width(10.dp))
+
+        // 2，自定义 switch
+        val state2 = remember { mutableStateOf(false) }
+        Switch(
+            checked = state2.value, onCheckedChange = { state2.value = it },
+            // 自定义样式
+            thumbContent = {
+                if (state2.value) {
+                    Icon(Icons.Filled.Check, contentDescription = null)
+                } else {
+                    // Icon(Icons.Filled.Close, contentDescription = null)
+                    null
+                }
+            },
+            // 自定义颜色
+            colors = SwitchDefaults.colors(
+                // 选中图标背景色
+                checkedThumbColor = Color(color = 0xFFFF6E15),
+                // 选中容器背景色
+                checkedTrackColor = Color(color = 0xD8A0A8BA),
+                // 未选中图标颜色
+                uncheckedThumbColor = Color(color = 0xFF06B4D6),
+                // 未选中容器背景色
+                uncheckedTrackColor = Color(color = 0x5501C52F)
+            )
+        )
+    }
+
+}
+
+
