@@ -50,7 +50,7 @@ import org.logan.compose.demo.base.fragment.BaseFragment
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_2_5_ComposeDialogFragment : BaseFragment() {
+class C2_2_5_DialogFragment : BaseFragment() {
 
     @Composable
     override fun MyFragmentView() {

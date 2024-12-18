@@ -20,13 +20,13 @@ import org.logan.compose.demo.R
 import org.logan.compose.demo.base.activity.BaseActivity
 import org.logan.compose.demo.base.activity.FillTopBarModifier
 import org.logan.compose.demo.base.fragment.NavMenuFragment
-import org.logan.compose.demo.ui.book.c2.C2_1_ComposeModifierPropertyFragment
-import org.logan.compose.demo.ui.book.c2.C2_2_1_ComposeTextFragment
-import org.logan.compose.demo.ui.book.c2.C2_2_2_ComposeImageFragment
-import org.logan.compose.demo.ui.book.c2.C2_2_3_ComposeButtonFragment
-import org.logan.compose.demo.ui.book.c2.C2_2_4_ComposeCheckboxFragment
-import org.logan.compose.demo.ui.book.c2.C2_2_5_ComposeDialogFragment
-import org.logan.compose.demo.ui.book.c2.C2_3_1_ComposeLayoutFragment
+import org.logan.compose.demo.ui.book.c2.C2_1_ModifierPropertyFragment
+import org.logan.compose.demo.ui.book.c2.C2_2_1_TextFragment
+import org.logan.compose.demo.ui.book.c2.C2_2_2_ImageFragment
+import org.logan.compose.demo.ui.book.c2.C2_2_3_ButtonFragment
+import org.logan.compose.demo.ui.book.c2.C2_2_4_CheckboxFragment
+import org.logan.compose.demo.ui.book.c2.C2_2_5_DialogFragment
+import org.logan.compose.demo.ui.book.c2.C2_3_1_LineLayoutFragment
 import org.logan.compose.demo.ui.book.c2.C2_3_4_ConstraintLayoutFragment
 import org.logan.compose.demo.ui.theme.AndroidComposeDemoTheme
 
@@ -110,13 +110,13 @@ fun FragmentContainer(modifier: Modifier = Modifier, fragment: Fragment) {
 
 private fun getMenuConfigs(): Map<String, Fragment?> {
     return mapOf(
-        "2.1 Modifier属性" to C2_1_ComposeModifierPropertyFragment(),
-        "2.2.1 文本" to C2_2_1_ComposeTextFragment(),
-        "2.2.2 图片" to C2_2_2_ComposeImageFragment(),
-        "2.2.3 Button" to C2_2_3_ComposeButtonFragment(),
-        "2.2.4 选择器" to C2_2_4_ComposeCheckboxFragment(),
-        "2.2.5 对话框、进度条" to C2_2_5_ComposeDialogFragment(),
-        "2.3.1 线性布局(线性、帧)" to C2_3_1_ComposeLayoutFragment(),
+        "2.1 Modifier属性" to C2_1_ModifierPropertyFragment(),
+        "2.2.1 文本" to C2_2_1_TextFragment(),
+        "2.2.2 图片" to C2_2_2_ImageFragment(),
+        "2.2.3 Button" to C2_2_3_ButtonFragment(),
+        "2.2.4 选择器" to C2_2_4_CheckboxFragment(),
+        "2.2.5 对话框、进度条" to C2_2_5_DialogFragment(),
+        "2.3.1 线性布局(线性、帧)" to C2_3_1_LineLayoutFragment(),
         "2.3.4 约束布局" to C2_3_4_ConstraintLayoutFragment(),
         // "C7 页面导航" to null,
     )

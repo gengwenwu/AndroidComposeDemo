@@ -68,7 +68,7 @@ import org.logan.compose.demo.utils.extension.showMsg
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_2_1_ComposeTextFragment : BaseFragment() {
+class C2_2_1_TextFragment : BaseFragment() {
 
     @Composable
     override fun MyFragmentView() {

@@ -39,7 +39,7 @@ import org.logan.compose.demo.base.fragment.BaseFragment
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_2_4_ComposeCheckboxFragment : BaseFragment() {
+class C2_2_4_CheckboxFragment : BaseFragment() {
 
     @Composable
     override fun MyFragmentView() {

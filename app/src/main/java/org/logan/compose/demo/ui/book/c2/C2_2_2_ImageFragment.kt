@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -37,7 +36,7 @@ import org.logan.compose.demo.base.fragment.BaseFragment
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_2_2_ComposeImageFragment : BaseFragment() {
+class C2_2_2_ImageFragment : BaseFragment() {
 
     @Composable
     override fun MyFragmentView() {

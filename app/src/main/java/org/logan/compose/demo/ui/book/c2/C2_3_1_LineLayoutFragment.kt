@@ -46,7 +46,7 @@ import org.logan.compose.demo.base.fragment.BaseFragment
  * author: Logan <br/>
  * since: V 1.0 <br/>
  */
-class C2_3_1_ComposeLayoutFragment : BaseFragment() {
+class C2_3_1_LineLayoutFragment : BaseFragment() {
 
     @Composable
     override fun MyFragmentView() {
