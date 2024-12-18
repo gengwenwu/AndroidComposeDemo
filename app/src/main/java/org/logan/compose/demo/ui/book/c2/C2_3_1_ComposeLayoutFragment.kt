@@ -1,12 +1,16 @@
 package org.logan.compose.demo.ui.book.c2
 
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,9 +30,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.logan.compose.demo.R
 import org.logan.compose.demo.base.fragment.BaseFragment
 
 /**
@@ -69,6 +76,8 @@ fun C2_3_1_ComposeLayoutSample() {
 
         BoxSample()
         Spacer(Modifier.height(8.dp))
+
+        SurfaceSample()
     }
 }
 
@@ -158,6 +167,49 @@ fun BoxSample() {
                     .background(Color.Red)
             ) {
                 Text("世界")
+            }
+        }
+    }
+}
+
+@Composable
+fun SurfaceSample() {
+    // Surface 是一个平面，将很多组件放在这个平面上，设置这个平面的形状、颜色、阴影、点击事件等。
+    // Surface 可以帮助我们更好的解耦一些代码，而不必在单个组件上添加更多的 Modifier 修饰符方法。
+    // Surface 与 Box 区别：
+    //      Surface：适合设置 形状、颜色、阴影、点击 等，其中阴影、点击事件，Box 是不能设置的。
+    //      Box：适合设置 背景、颜色、大小。
+    Surface(
+        modifier = Modifier.size(width = 300.dp, height = 100.dp),
+        shape = RoundedCornerShape(25.dp),
+        // 背景色
+        // color = Color(0xFF00BDE5),
+        // 阴影
+        shadowElevation = 10.dp,
+    ) {
+        Row(modifier = Modifier
+            .fillMaxSize()
+            .clickable {
+                Log.v("TLog", "====== 点击了 Surface -> Row ")
+            }) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_left_boy),
+                contentDescription = null,
+                modifier = Modifier.size(100.dp),
+                contentScale = ContentScale.Crop
+            )
+
+            Column(modifier = Modifier.fillMaxHeight()) {
+                Text(
+                    "留守儿童",
+                    modifier = Modifier.padding(start = 8.dp, top = 10.dp),
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    "迷失的童年, 失去的未来",
+                    modifier = Modifier.padding(start = 8.dp, top = 12.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
         }
     }
