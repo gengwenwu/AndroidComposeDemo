@@ -3,11 +3,22 @@ package org.logan.compose.demo.ui.book.c2
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.logan.compose.demo.base.fragment.BaseFragment
 
 /**
@@ -48,6 +60,9 @@ fun C2_3_1_ComposeLayoutSample() {
         Spacer(Modifier.height(8.dp))
 
         ColumnSample2()
+        Spacer(Modifier.height(8.dp))
+
+        RowSample()
     }
 }
 
@@ -65,7 +80,7 @@ fun ColumnSample2() {
     Column(
         modifier = Modifier
             .border(1.dp, Color.Blue)
-            .size(width = 200.dp, height = 80.dp),
+            .size(width = 260.dp, height = 80.dp),
         // 只有指定 Column 高宽后，verticalArrangement、horizontalAlignment 才会生效。
         verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -79,3 +94,44 @@ fun ColumnSample2() {
         )
     }
 }
+
+@Composable
+fun RowSample() {
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .fillMaxWidth(),
+        shadowElevation = 10.dp
+    ) {
+        Column(modifier = Modifier.padding(12.dp)) {
+            Text(text = "Jetpack Compose是什么？", fontSize = 20.sp)
+            Spacer(modifier = Modifier.padding(vertical = 5.dp))
+            Text(
+                text = "Jetpack Compose是用于构建原生 Android UI的新工具包。它可简化并加速 Android UI 开发，更少的代码、强大的工具。",
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            // Row 组件能够将内部的子项按照从左到右的水平方向进行排列。
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                // 水平方向的排列方式, 默认为 Arrangement.Start。总共7种，分别是：Start、Center、End、SpaceAround、SpaceBetween、SpaceEvenly、EqualWeight
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                IconButton(onClick = {}) {
+                    Icon(imageVector = Icons.Default.Favorite, contentDescription = null)
+                }
+                IconButton(onClick = {}) {
+                    Icon(imageVector = Icons.Default.Call, contentDescription = null)
+                }
+                IconButton(onClick = {}) {
+                    Icon(imageVector = Icons.Default.Done, contentDescription = null)
+                }
+            }
+
+        }
+    }
+}
+
