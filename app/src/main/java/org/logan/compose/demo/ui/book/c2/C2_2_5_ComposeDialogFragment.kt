@@ -1,5 +1,6 @@
 package org.logan.compose.demo.ui.book.c2
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,15 +11,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -27,6 +39,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.logan.compose.demo.R
 import org.logan.compose.demo.base.fragment.BaseFragment
 
@@ -63,8 +77,11 @@ fun C2_2_5_ComposeDialogSample(modifier: Modifier = Modifier) {
 
         DialogSample()
         AlertDialogSample()
-    }
 
+        CircularProgressIndicatorSample()
+        LinearDeterminateIndicator()
+        IndeterminateCircularIndicator()
+    }
 }
 
 @Composable
@@ -156,6 +173,7 @@ fun AlertDialogSample() {
     }
 
     if (openDialog.value) {
+        // AlertDialog 是 Dialog 组件的高级封装，它提供了更多的定制选项，如标题、文本、按钮等。
         AlertDialog(
             // 关闭对话框执行的回调，在这里修改 openDialog.value 来关闭对话框
             onDismissRequest = {
@@ -187,4 +205,84 @@ fun AlertDialogSample() {
                 }
             })
     }
+}
+
+@Composable
+fun CircularProgressIndicatorSample() {
+    var progress by remember { mutableFloatStateOf(0.1f) }
+
+    // 创建动画 Progress 变量
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
+        label = ""
+    )
+
+    Row(modifier = Modifier.padding(top = 10.dp)) {
+        // 圆形进度条指示器
+        CircularProgressIndicator(progress = { animatedProgress })
+
+        Spacer(Modifier.requiredWidth(10.dp))
+        OutlinedButton(onClick = {
+            if (progress < 1f) {
+                // 增加10%左右进度
+                progress += 0.1f
+            }
+        }) {
+            Text("添加进度")
+        }
+    }
+}
+
+@Composable
+fun LinearDeterminateIndicator() {
+    var currentProgress by remember { mutableFloatStateOf(0f) }
+    var loading by remember { mutableStateOf(true) }
+    val scope = rememberCoroutineScope()
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+        horizontalAlignment = Alignment.End
+    ) {
+        Button(onClick = {
+            loading = true
+
+            scope.launch {
+                loadProgress {
+                    currentProgress = it
+                }
+                // Reset loading when the coroutine finishes
+                loading = false
+            }
+        }) {
+            Text("开始加载")
+        }
+
+        if (loading) {
+            // 直线进度条
+            LinearProgressIndicator(
+                progress = { currentProgress }, modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+suspend fun loadProgress(updateProgress: (Float) -> Unit) {
+    for (i in 1..100) {
+        updateProgress(i.toFloat() / 100)
+        delay(100)
+    }
+}
+
+@Composable
+fun IndeterminateCircularIndicator() {
+    // 无限循环旋转
+    CircularProgressIndicator(
+        modifier = Modifier
+            .width(54.dp)
+            .padding(top = 12.dp, start = 16.dp),
+        color = MaterialTheme.colorScheme.secondary,
+        trackColor = MaterialTheme.colorScheme.surfaceVariant
+    )
 }
