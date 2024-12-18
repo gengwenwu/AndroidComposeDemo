@@ -24,6 +24,7 @@ import org.logan.compose.demo.ui.book.c2.C2_1_ComposeModifierPropertyFragment
 import org.logan.compose.demo.ui.book.c2.C2_2_1_ComposeTextFragment
 import org.logan.compose.demo.ui.book.c2.C2_2_2_ComposeImageFragment
 import org.logan.compose.demo.ui.book.c2.C2_2_3_ComposeButtonFragment
+import org.logan.compose.demo.ui.book.c2.C2_2_4_ComposeCheckboxFragment
 import org.logan.compose.demo.ui.book.c2.C2_2_5_ComposeDialogFragment
 import org.logan.compose.demo.ui.theme.AndroidComposeDemoTheme
 
@@ -111,7 +112,8 @@ private fun getMenuConfigs(): Map<String, Fragment?> {
         "2.2.1 文本" to C2_2_1_ComposeTextFragment(),
         "2.2.2 图片" to C2_2_2_ComposeImageFragment(),
         "2.2.3 Button" to C2_2_3_ComposeButtonFragment(),
-        "2.2.4 选择器" to C2_2_5_ComposeDialogFragment(),
+        "2.2.4 选择器" to C2_2_4_ComposeCheckboxFragment(),
+        "2.2.5 对话框" to C2_2_5_ComposeDialogFragment(),
         // "C6 手势处理" to null,
         // "C7 页面导航" to null,
     )
