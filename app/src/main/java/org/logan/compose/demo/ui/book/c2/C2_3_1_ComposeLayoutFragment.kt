@@ -1,7 +1,9 @@
 package org.logan.compose.demo.ui.book.c2
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -63,6 +65,10 @@ fun C2_3_1_ComposeLayoutSample() {
         Spacer(Modifier.height(8.dp))
 
         RowSample()
+        Spacer(Modifier.height(8.dp))
+
+        BoxSample()
+        Spacer(Modifier.height(8.dp))
     }
 }
 
@@ -117,7 +123,9 @@ fun RowSample() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp),
-                // 水平方向的排列方式, 默认为 Arrangement.Start。总共7种，分别是：Start、Center、End、SpaceAround、SpaceBetween、SpaceEvenly、EqualWeight
+                // 水平方向的排列方式, 默认为 Arrangement.Start。
+                // 总共7种，分别是：Start、Center、End、SpaceAround、SpaceBetween、SpaceEvenly、EqualWeight
+                // 具体见：https://developer.android.com/develop/ui/compose/layouts/flow?hl=zh-cn 效果
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 IconButton(onClick = {}) {
@@ -135,3 +143,22 @@ fun RowSample() {
     }
 }
 
+@Composable
+fun BoxSample() {
+    // Box 组件将里面的子组件依次按照顺序堆叠的布局，类似于传统 FrameLayout
+    Box {
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(Color.Green)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .background(Color.Red)
+            ) {
+                Text("世界")
+            }
+        }
+    }
+}
