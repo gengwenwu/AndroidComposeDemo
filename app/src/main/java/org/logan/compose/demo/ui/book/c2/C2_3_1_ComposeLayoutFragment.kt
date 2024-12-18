@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
@@ -33,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.logan.compose.demo.R
@@ -78,6 +80,9 @@ fun C2_3_1_ComposeLayoutSample() {
         Spacer(Modifier.height(8.dp))
 
         SurfaceSample()
+        Spacer(Modifier.height(8.dp))
+
+        SpacerSample()
     }
 }
 
@@ -214,3 +219,41 @@ fun SurfaceSample() {
         }
     }
 }
+
+
+@Composable
+fun SpacerSample() {
+    // Spacer 是一个无内容的组件，用于在布局中添加一些间距(空白)。当 Box 没有 content时，完全可以用 Spacer 替代
+    Text("Spacer 示例:")
+    Row(Modifier.fillMaxWidth()) {
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .background(Color.Red)
+        )
+        // Spacer width
+        Spacer(modifier = Modifier.width(20.dp))
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .background(Color.Green)
+        )
+        // 自定义宽度 Spacer
+        widthSpacer(30.dp)
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .background(Color.Blue)
+        )
+        // Spacer weight 1f 占据剩余部分
+        Spacer(modifier = Modifier.weight(1f))
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .background(Color.Yellow)
+        )
+    }
+}
+
+@Composable
+fun widthSpacer(value: Dp) = Spacer(modifier = Modifier.width(value))
