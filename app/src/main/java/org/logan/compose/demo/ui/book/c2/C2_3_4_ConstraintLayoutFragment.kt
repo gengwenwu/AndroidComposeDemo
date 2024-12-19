@@ -1,6 +1,8 @@
 package org.logan.compose.demo.ui.book.c2
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,13 +10,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -71,6 +78,12 @@ fun C2_3_4_ConstraintLayoutSample() {
         Spacer(Modifier.height(10.dp))
 
         ConstraintLayoutBarrierSample()
+        Spacer(Modifier.height(10.dp))
+
+        ConstraintLayoutGuidelineSample()
+        Spacer(Modifier.height(10.dp))
+
+
     }
 }
 
@@ -128,17 +141,22 @@ fun ConstraintLayoutBarrierSample() {
         modifier = Modifier
             .fillMaxWidth()
             .shadow(1.dp)
-            .height(100.dp)
-            .padding(16.dp)
+            .padding(horizontal = 16.dp, vertical = 20.dp)
     ) {
         val (userNameTextRef, passwordTextRef, usernameInputRef, passwordInputRef, dividerRef) = remember { createRefs() }
         // 1. 创建一个结尾分界线
         val barrier = createEndBarrier(userNameTextRef, passwordTextRef)
 
-        Text("用户名", Modifier.constrainAs(userNameTextRef) {
-            top.linkTo(parent.top)
-            start.linkTo(parent.start)
-        })
+        Text(
+            "用户名",
+            modifier = Modifier
+                .height(45.dp)
+                .constrainAs(userNameTextRef) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                }
+                .wrapContentHeight(Alignment.CenterVertically),
+        )
 
         OutlinedTextField("",
             onValueChange = {},
@@ -149,6 +167,9 @@ fun ConstraintLayoutBarrierSample() {
                 bottom.linkTo(userNameTextRef.bottom)
                 // 高度根据约束条件来
                 height = Dimension.fillToConstraints
+            },
+            label = {
+                Text(text = "Barrier示例")
             })
 
         HorizontalDivider(thickness = 1.dp, modifier = Modifier.constrainAs(dividerRef) {
@@ -158,10 +179,14 @@ fun ConstraintLayoutBarrierSample() {
             width = Dimension.fillToConstraints
         })
 
-        Text("密码", Modifier.constrainAs(passwordTextRef) {
-            top.linkTo(dividerRef.bottom, margin = 12.dp)
-            start.linkTo(userNameTextRef.start)
-        })
+        Text("密码",
+            Modifier
+                .height(45.dp)
+                .wrapContentHeight(Alignment.CenterVertically)
+                .constrainAs(passwordTextRef) {
+                    top.linkTo(dividerRef.bottom, margin = 12.dp)
+                    start.linkTo(userNameTextRef.start)
+                })
 
         OutlinedTextField("", onValueChange = {}, Modifier.constrainAs(passwordInputRef) {
             start.linkTo(usernameInputRef.start)
@@ -171,4 +196,59 @@ fun ConstraintLayoutBarrierSample() {
         })
     }
 
+}
+
+@Composable
+fun ConstraintLayoutGuidelineSample() {
+    Box(
+        modifier = Modifier
+            .height(200.dp)
+            .fillMaxWidth()
+    ) {
+
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .background(Color.LightGray)
+        ) {
+
+            // 使用 guideline 不依赖任何引用，凭空创建一条引导线。 下面案例是从顶部出发，从上到下，占比布局30%案例
+            val guideline = createGuidelineFromTop(0.3f)
+            val (userPortraitBackgroundRef, userPortraitImgRef, welcomeRef) = remember { createRefs() }
+
+            Box(modifier = Modifier
+                .constrainAs(userPortraitBackgroundRef) {
+                    top.linkTo(parent.top)
+                    // box底部 与 guideline 对齐
+                    bottom.linkTo(guideline)
+                    height = Dimension.fillToConstraints
+                    width = Dimension.matchParent
+                }
+                .background(Color(0xFF1E9FFF)))
+
+            Image(painter = painterResource(R.drawable.ic_boy),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .constrainAs(userPortraitImgRef) {
+                        // Image top、bottom 与 guideline 对齐，就是Image居中 guideline 位置
+                        top.linkTo(guideline)
+                        bottom.linkTo(guideline)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .size(60.dp)
+                    .clip(CircleShape))
+
+            Text("Compose guideline 示例",
+                fontSize = 26.sp,
+                color = Color.White,
+                modifier = Modifier.constrainAs(welcomeRef) {
+                    top.linkTo(userPortraitImgRef.bottom, margin = 20.dp)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                })
+        }
+    }
 }
