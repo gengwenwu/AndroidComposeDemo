@@ -2,12 +2,14 @@ package org.logan.compose.demo.ui.book.c2
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -50,6 +52,7 @@ fun C2_3_4_ConstraintLayoutSample() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .height(100.dp)
             .padding(16.dp)
     ) {
         // 使用 ConstraintLayout 布局，两步骤：创建引用 和 绑定引用
@@ -65,7 +68,9 @@ fun C2_3_4_ConstraintLayoutSample() {
         //      Modifier.constrainAs(portraitImageRef) // 该函数只能在 ConstraintLayoutScope 中使用
 
         SimpleConstraintLayoutSample()
+        Spacer(Modifier.height(10.dp))
 
+        ConstraintLayoutBarrierSample()
     }
 }
 
@@ -73,7 +78,7 @@ fun C2_3_4_ConstraintLayoutSample() {
 fun SimpleConstraintLayoutSample() {
     ConstraintLayout(
         modifier = Modifier
-            .shadow(2.dp, shape = RoundedCornerShape(16.dp))
+            .shadow(1.dp)
             .fillMaxWidth()
             .height(100.dp)
             .padding(10.dp)
@@ -103,6 +108,7 @@ fun SimpleConstraintLayoutSample() {
 
         Text("我的个人描述, 看看书、看看剧。比如：《百年孤独》、《豺狼的日子》、《权利的游戏》",
             maxLines = 2,
+            fontSize = 12.sp,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.constrainAs(desTextRef) {
                 // text top.linkTo 表示与 usernameTextRef 的底部对齐，margin 表示间距
@@ -116,3 +122,53 @@ fun SimpleConstraintLayoutSample() {
     }
 }
 
+@Composable
+fun ConstraintLayoutBarrierSample() {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .shadow(1.dp)
+            .height(100.dp)
+            .padding(16.dp)
+    ) {
+        val (userNameTextRef, passwordTextRef, usernameInputRef, passwordInputRef, dividerRef) = remember { createRefs() }
+        // 1. 创建一个结尾分界线
+        val barrier = createEndBarrier(userNameTextRef, passwordTextRef)
+
+        Text("用户名", Modifier.constrainAs(userNameTextRef) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+        })
+
+        OutlinedTextField("",
+            onValueChange = {},
+            modifier = Modifier.constrainAs(usernameInputRef) {
+                // 将左侧起始位置指定为分界线后10.dp的位置
+                start.linkTo(barrier, 10.dp)
+                top.linkTo(userNameTextRef.top)
+                bottom.linkTo(userNameTextRef.bottom)
+                // 高度根据约束条件来
+                height = Dimension.fillToConstraints
+            })
+
+        HorizontalDivider(thickness = 1.dp, modifier = Modifier.constrainAs(dividerRef) {
+            top.linkTo(userNameTextRef.bottom, margin = 12.dp)
+            start.linkTo(userNameTextRef.start)
+            end.linkTo(parent.end)
+            width = Dimension.fillToConstraints
+        })
+
+        Text("密码", Modifier.constrainAs(passwordTextRef) {
+            top.linkTo(dividerRef.bottom, margin = 12.dp)
+            start.linkTo(userNameTextRef.start)
+        })
+
+        OutlinedTextField("", onValueChange = {}, Modifier.constrainAs(passwordInputRef) {
+            start.linkTo(usernameInputRef.start)
+            top.linkTo(passwordTextRef.top)
+            bottom.linkTo(passwordTextRef.bottom)
+            height = Dimension.fillToConstraints
+        })
+    }
+
+}
