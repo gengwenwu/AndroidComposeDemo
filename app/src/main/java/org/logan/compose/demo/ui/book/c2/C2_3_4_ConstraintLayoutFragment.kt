@@ -189,7 +189,7 @@ fun ConstraintLayoutBarrierSample() {
                 })
 
         OutlinedTextField("", onValueChange = {}, Modifier.constrainAs(passwordInputRef) {
-            start.linkTo(usernameInputRef.start)
+            start.linkTo(barrier, 10.dp)
             top.linkTo(passwordTextRef.top)
             bottom.linkTo(passwordTextRef.bottom)
             height = Dimension.fillToConstraints

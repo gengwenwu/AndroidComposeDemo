@@ -168,8 +168,10 @@ fun SwitchSample() {
             // 自定义样式
             thumbContent = {
                 if (state2.value) {
+                    // 选中样式
                     Icon(Icons.Filled.Check, contentDescription = null)
                 } else {
+                    // 未选中样式
                     // Icon(Icons.Filled.Close, contentDescription = null)
                     null
                 }

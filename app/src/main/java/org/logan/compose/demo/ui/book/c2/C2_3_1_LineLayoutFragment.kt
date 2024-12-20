@@ -102,7 +102,10 @@ fun ColumnSample2() {
             .border(1.dp, Color.Blue)
             .size(width = 260.dp, height = 80.dp),
         // 只有指定 Column 高宽后，verticalArrangement、horizontalAlignment 才会生效。
-        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally
+        // 垂直对其
+        verticalArrangement = Arrangement.Center,
+        // 水平对其
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Hello, World.")
         Text(
