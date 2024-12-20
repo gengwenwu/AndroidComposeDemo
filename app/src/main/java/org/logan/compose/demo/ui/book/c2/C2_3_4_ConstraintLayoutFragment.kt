@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import org.logan.compose.demo.R
@@ -83,7 +84,7 @@ fun C2_3_4_ConstraintLayoutSample() {
         ConstraintLayoutGuidelineSample()
         Spacer(Modifier.height(10.dp))
 
-
+        ConstraintLayoutChainSample()
     }
 }
 
@@ -251,4 +252,44 @@ fun ConstraintLayoutGuidelineSample() {
                 })
         }
     }
+}
+
+@Composable
+fun ConstraintLayoutChainSample() {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(120.dp)
+            .background(Color.LightGray)
+    ) {
+        val (quotesFirstLineRef, quotesSecondLineRef, quotesThirdLineRef, quotesForthLineRef) = remember { createRefs() }
+
+        // createVerticalChain() 垂直方向上的约束链。createHorizontalChain(), 创建水平方向上的约束链。
+        createVerticalChain(
+            quotesFirstLineRef, quotesSecondLineRef, quotesThirdLineRef, quotesForthLineRef,
+            // ChainStyle 提供三种 Chain Style ：
+            //  1, ChainStyle.Spread: 所有元素平分  parent 空间
+            //  2, ChainStyle.SpreadInside: 首位贴紧边界，剩余元素平分 parent 空间
+            //  3, ChainStyle.Packed: 所有元素聚集在中间
+            chainStyle = ChainStyle.Packed
+        )
+
+        Text("寄蜉蝣于天地，", modifier = Modifier.constrainAs(quotesFirstLineRef) {
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        })
+        Text("渺沧海之一粟。", modifier = Modifier.constrainAs(quotesSecondLineRef) {
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        })
+        Text("哀吾生之须臾，", modifier = Modifier.constrainAs(quotesThirdLineRef) {
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        })
+        Text("羡长江之无穷。", modifier = Modifier.constrainAs(quotesForthLineRef) {
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        })
+    }
+
 }
