@@ -57,7 +57,7 @@ fun C2_3_5_ScaffoldFragmentSample() {
         Icons.Filled.Check, Icons.Filled.Call, Icons.Filled.AccountBox
     )
 
-    // Scaffold 组件，它是一个容器，它提供了一个标准的 Android 应用界面，它包含了：标题栏、底部栏、悬浮按钮、抽屉等。
+    // Scaffold 组件，它是一个容器，它提供了一个标准的 Android 应用界面，它包含了：标题栏、底部栏、悬浮按钮 等。
     Scaffold(
         // 顶部 bar。有4种类型：小、居中对其、中等、大。见：https://developer.android.google.cn/develop/ui/compose/components/app-bars?hl=zh-cn
         topBar = {
