@@ -28,6 +28,7 @@ import org.logan.compose.demo.ui.book.c2.C2_2_4_CheckboxFragment
 import org.logan.compose.demo.ui.book.c2.C2_2_5_DialogFragment
 import org.logan.compose.demo.ui.book.c2.C2_3_1_LineLayoutFragment
 import org.logan.compose.demo.ui.book.c2.C2_3_4_ConstraintLayoutFragment
+import org.logan.compose.demo.ui.book.c2.C2_3_5_ScaffoldFragment
 import org.logan.compose.demo.ui.theme.AndroidComposeDemoTheme
 
 /**
@@ -118,6 +119,7 @@ private fun getMenuConfigs(): Map<String, Fragment?> {
         "2.2.5 对话框、进度条" to C2_2_5_DialogFragment(),
         "2.3.1 线性布局(线性、帧)" to C2_3_1_LineLayoutFragment(),
         "2.3.4 约束布局" to C2_3_4_ConstraintLayoutFragment(),
+        "2.3.4 Scaffold" to C2_3_5_ScaffoldFragment(),
         // "C7 页面导航" to null,
     )
 }
