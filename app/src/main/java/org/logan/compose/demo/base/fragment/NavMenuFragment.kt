@@ -19,8 +19,8 @@ import org.logan.compose.demo.utils.extension.showMsg
  * since: V 1.0 <br/>
  */
 class NavMenuFragment(
-    private val menu: Map<String, Fragment?>,
-    private val menuClickConsumer: ((Fragment) -> Unit)? = null
+    private val menu: Map<String, Any?>,
+    private val menuClickConsumer: ((Any) -> Unit)? = null
 ) : BaseFragment() {
 
 
@@ -39,14 +39,14 @@ class NavMenuFragment(
 }
 
 @Composable
-fun MenuButton(text: String, fragment: Fragment?, menuClickConsumer: ((Fragment) -> Unit)? = null) {
+fun MenuButton(text: String, fragment: Any?, menuClickConsumer: ((Any) -> Unit)? = null) {
     val context = LocalContext.current
 
     Button(
         //
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp),
-            //.height(40.dp),
+        //.height(40.dp),
         //
         onClick = {
             if (fragment == null) {

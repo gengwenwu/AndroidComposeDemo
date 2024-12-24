@@ -2,7 +2,6 @@ package org.logan.compose.demo.base.activity
 
 import android.app.Activity
 import android.content.Intent
-import android.widget.Toast
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues

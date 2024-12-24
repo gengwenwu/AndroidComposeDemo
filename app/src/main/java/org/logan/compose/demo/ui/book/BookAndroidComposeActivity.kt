@@ -1,5 +1,6 @@
 package org.logan.compose.demo.ui.book
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -30,6 +31,7 @@ import org.logan.compose.demo.ui.book.c2.C2_3_1_LineLayoutFragment
 import org.logan.compose.demo.ui.book.c2.C2_3_4_ConstraintLayoutFragment
 import org.logan.compose.demo.ui.book.c2.C2_3_5_ScaffoldFragment
 import org.logan.compose.demo.ui.book.c2.C2_4_ColumnFragment
+import org.logan.compose.demo.ui.book.c3.BloomWelcomeActivity
 import org.logan.compose.demo.ui.theme.AndroidComposeDemoTheme
 
 /**
@@ -57,15 +59,19 @@ class BookAndroidComposeActivity : BaseActivity() {
         }
     }
 
-    private fun showClickMenu(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().run {
-            supportFragmentManager.findFragmentById(R.id.fragment_container)?.let {
-                this.hide(it)
-            }
+    private fun showClickMenu(any: Any) {
+        if (any is Fragment) {
+            supportFragmentManager.beginTransaction().run {
+                supportFragmentManager.findFragmentById(R.id.fragment_container)?.let {
+                    this.hide(it)
+                }
 
-            this.add(R.id.fragment_container, fragment, null)
-            this.commit()
-            this.addToBackStack(null) // 将事务添加到回退栈
+                this.add(R.id.fragment_container, any, null)
+                this.commit()
+                this.addToBackStack(null) // 将事务添加到回退栈
+            }
+        } else if (any is Class<*>) {
+            this.startActivity(Intent(this, any))
         }
     }
 
@@ -110,7 +116,7 @@ fun FragmentContainer(modifier: Modifier = Modifier, fragment: Fragment) {
     }
 }
 
-private fun getMenuConfigs(): Map<String, Fragment?> {
+private fun getMenuConfigs(): Map<String, Any?> {
     return mapOf(
         "2.1 Modifier属性" to C2_1_ModifierPropertyFragment(),
         "2.2.1 文本" to C2_2_1_TextFragment(),
@@ -122,6 +128,8 @@ private fun getMenuConfigs(): Map<String, Fragment?> {
         "2.3.4 约束布局" to C2_3_4_ConstraintLayoutFragment(),
         "2.3.5 Scaffold" to C2_3_5_ScaffoldFragment(),
         "2.4 列" to C2_4_ColumnFragment(),
+        "2.4 列" to C2_4_ColumnFragment(),
+        "3.0 Bloom定制UI" to BloomWelcomeActivity::class.java,
         // "C7 页面导航" to null,
     )
 }
