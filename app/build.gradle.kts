@@ -44,6 +44,9 @@ dependencies {
     implementation(libs.androidx.appcompat)
     // 约束布局
     implementation(libs.androidx.constraintlayout)
+    // 底部导航栏
+    // implementation(libs.androidx.navigation.compose)
+
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
