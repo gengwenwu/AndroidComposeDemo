@@ -151,7 +151,7 @@ fun LazyItemSpaceSample() {
             .fillMaxWidth()
             .height(150.dp)
             .background(Color.LightGray),
-        // 指定列表边距
+        // 指定列表边距(上下左右)
         contentPadding = PaddingValues(25.dp),
         // 指定列表项垂直间距
         verticalArrangement = Arrangement.spacedBy(5.dp)
