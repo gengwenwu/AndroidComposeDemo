@@ -2,6 +2,8 @@ package org.logan.compose.demo.ui.book.c3
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -9,14 +11,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,9 +38,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -55,12 +68,21 @@ import org.logan.compose.demo.utils.extension.showMsg
  */
 
 
+// 底部导航
 val navList = listOf(
     Pair("Home", R.drawable.ic_home),
     Pair("Favorites", R.drawable.ic_favorite_border),
     Pair("Profile", R.drawable.ic_account_circle),
     Pair("Cart", R.drawable.ic_shopping_cart)
 )
+
+// banner
+val bloomBannerList = listOf(
+    Pair("Desert chic", R.drawable.desert_chic),
+    Pair("Tiny terrariums", R.drawable.tiny_terrariums),
+    Pair("Jungle Vibes", R.drawable.jungle_vibes)
+)
+
 
 class BloomHomeActivity : BaseActivity() {
 
@@ -219,6 +241,82 @@ fun SearchBar() {
 
 @Composable
 fun BloomRowBanner() {
+    Spacer(modifier = Modifier.height(16.dp))
+    Text("Browse themes", fontSize = 24.sp, fontFamily = FontFamily(Font(R.font.alibaba_heavy)))
+
+    LazyRow(modifier = Modifier.padding(top = 8.dp)) {
+        itemsIndexed(bloomBannerList) { index, item ->
+            if (index != 0) {
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+
+            PlantCard(item.first, item.second)
+        }
+    }
+}
+
+@Composable
+fun PlantCard(plant: String, image: Int) {
+    // 写法1
+    Card(
+        modifier = Modifier
+            .size(136.dp)
+            .clip(RoundedCornerShape(8.dp)),
+        colors = CardDefaults.cardColors().copy(containerColor = Color.White),
+        border = BorderStroke((0.2).dp, Color.Gray),
+        elevation = CardDefaults.cardElevation(2.dp)
+    ) {
+        Image(
+            painter = painterResource(image),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(96.dp),
+            contentScale = ContentScale.Crop,
+            contentDescription = null
+        )
+        Text(
+            plant,
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentHeight(),
+            fontSize = 14.sp,
+            color = Color.Black,
+            textAlign = TextAlign.Center
+        )
+    }
+
+    // 写法2
+//    Card(
+//        modifier = Modifier.size(136.dp),
+//        border = BorderStroke((0.2).dp, Color.Gray),
+//        shape = RoundedCornerShape(16.dp),
+//        elevation = CardDefaults.cardElevation(2.dp)
+//    ) {
+//        Column(
+//            Modifier.background(Color.White)
+//        ) {
+//            Image(
+//                painterResource(id = image),
+//                contentScale = ContentScale.Crop,
+//                contentDescription = "image",
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .height(96.dp)
+//            )
+//            Box(
+//                modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center
+//            ) {
+//                Text(
+//                    text = plant,
+//                    color = Gray,
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .paddingFromBaseline(top = 24.dp, bottom = 16.dp),
+//                    textAlign = TextAlign.Center
+//                )
+//            }
+//        }
+//    }
 
 }
 
