@@ -137,7 +137,7 @@ fun HomePage() {
                 .padding(innerPadding)
                 .fillMaxSize()
                 .background(White)
-                .padding(16.dp)
+                .padding(top = 16.dp, start = 16.dp, end = 16.dp)
         ) {
             SearchBar()
             BloomRowBanner()
