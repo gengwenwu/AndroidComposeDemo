@@ -392,7 +392,7 @@ fun OutlinedTextFieldSample() {
     OutlinedTextField(value = text, onValueChange = {
         text = it
     }, label = {
-        Text(text = "用户名")
+        Text(text = "用户名(OutlinedTextField案例)")
     }, placeholder = {
         Text(text = "请输入用户名")
     })
@@ -403,7 +403,7 @@ fun BasicTextFileSample() {
     // BasicTextField 支持更多的定制， 它的参数 与 TextField 的有很多共同地方。
     // 关键参数在于 decorationBox， 它也是 Composable 类型，可以用于自定义输入框的样式。
 
-    var text by remember { mutableStateOf("") }
+    var text by remember { mutableStateOf("BasicTextField 输入框案例") }
     BasicTextField(value = text, onValueChange = {
         text = it
     },

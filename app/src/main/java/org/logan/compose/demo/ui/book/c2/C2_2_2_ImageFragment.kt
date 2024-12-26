@@ -77,7 +77,7 @@ fun C2_2_2_ComposeImageSample(modifier: Modifier = Modifier) {
 fun IconSampleFromIconLib() {
     // Icon 组件用于显示一些列小图标, Google 内置了5种类型图标(svg)，在 Icons.xxx.xxx，5种分别是：Outlined、Filled、Rounded、Sharp、TwoTone。
     // 更多见 https://fonts.google.com/icons，更多icon 可以引入 "androidx.compose.material:material-icons-extended:xxx"。
-    // 大图标是无法显示的，黑色背景
+    // 大图标, Icon组件是无法显示的，黑色背景
     Row(
         modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
     ) {

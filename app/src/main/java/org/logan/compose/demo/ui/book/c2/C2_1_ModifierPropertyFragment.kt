@@ -96,6 +96,7 @@ fun ModifierSizeSample(modifier: Modifier = Modifier) {
             painterResource(id = R.drawable.ic_boy), contentDescription = null, modifier = Modifier
                 // width、height 同时设置为100dp
                 .size(100.dp)
+                // 裁剪图形
                 .clip(CircleShape)
         )
     }

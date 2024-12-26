@@ -1,6 +1,7 @@
 package org.logan.compose.demo.ui.book.c2
 
 import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -190,7 +191,8 @@ fun SurfaceSample() {
     Surface(
         modifier = Modifier.size(width = 300.dp, height = 100.dp),
         shape = RoundedCornerShape(25.dp),
-        // 背景色
+        border = BorderStroke(0.2.dp, Color.Gray),
+        // 背景
         // color = Color(0xFF00BDE5),
         // 阴影
         shadowElevation = 10.dp,
