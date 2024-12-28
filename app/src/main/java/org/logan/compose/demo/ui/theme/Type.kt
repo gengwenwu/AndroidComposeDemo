@@ -42,11 +42,17 @@ val nunitoSansFamily = FontFamily(
 )
 
 val title1 = TextStyle(
-    fontSize = 18.sp, fontFamily = nunitoSansFamily, fontWeight = FontWeight.Bold
+    fontSize = 18.sp,
+    fontFamily = nunitoSansFamily,
+    fontWeight = FontWeight.Bold,
+    letterSpacing = 1.sp
 )
 
 val title2 = TextStyle(
-    fontSize = 16.sp, fontFamily = nunitoSansFamily, fontWeight = FontWeight.Medium
+    fontSize = 16.sp,
+    fontFamily = nunitoSansFamily,
+    fontWeight = FontWeight.Medium,
+    letterSpacing = 1.sp
 )
 
 val body1 = TextStyle(
