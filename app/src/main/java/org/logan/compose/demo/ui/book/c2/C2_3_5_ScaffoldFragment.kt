@@ -44,7 +44,7 @@ class C2_3_5_ScaffoldFragment : BaseFragment() {
 
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun C2_3_5_ScaffoldFragmentSamplePreview() {
     C2_3_5_ScaffoldFragmentSample()

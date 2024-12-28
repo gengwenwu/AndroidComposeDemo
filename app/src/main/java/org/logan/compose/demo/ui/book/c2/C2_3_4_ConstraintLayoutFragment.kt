@@ -49,7 +49,7 @@ class C2_3_4_ConstraintLayoutFragment : BaseFragment() {
 
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun C2_3_4_ConstraintLayoutSamplePreview() {
     C2_3_4_ConstraintLayoutSample()

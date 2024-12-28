@@ -45,7 +45,7 @@ class C2_4_ColumnFragment : BaseFragment() {
 
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun C2_4_ColumnFragmentSamplePreview() {
     C2_4_ColumnFragmentSample()

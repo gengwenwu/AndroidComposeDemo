@@ -32,6 +32,7 @@ import org.logan.compose.demo.ui.book.c2.C2_3_4_ConstraintLayoutFragment
 import org.logan.compose.demo.ui.book.c2.C2_3_5_ScaffoldFragment
 import org.logan.compose.demo.ui.book.c2.C2_4_ColumnFragment
 import org.logan.compose.demo.ui.book.c3.BloomWelcomeActivity
+import org.logan.compose.demo.ui.book.c3.C3_2_ThemeFragment
 import org.logan.compose.demo.ui.theme.AndroidComposeDemoTheme
 
 /**
@@ -129,7 +130,8 @@ private fun getMenuConfigs(): Map<String, Any?> {
         "2.3.5 Scaffold" to C2_3_5_ScaffoldFragment(),
         "2.4 列" to C2_4_ColumnFragment(),
         "2.4 列" to C2_4_ColumnFragment(),
-        "3.0 Bloom定制UI" to BloomWelcomeActivity::class.java,
+        "3.1 Bloom定制UI" to BloomWelcomeActivity::class.java,
+        "3.2 主题" to C3_2_ThemeFragment(),
         // "C7 页面导航" to null,
     )
 }
