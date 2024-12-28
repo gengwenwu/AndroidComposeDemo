@@ -32,7 +32,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.logan.compose.demo.base.fragment.BaseFragment
 import org.logan.compose.demo.ui.theme.AndroidComposeDemoTheme
+import org.logan.compose.demo.ui.theme.body1
+import org.logan.compose.demo.ui.theme.title1
 import org.logan.compose.demo.ui.theme.Teal200
+import org.logan.compose.demo.ui.theme.title2
 
 /**
  * desc: 主题 <br/>
@@ -72,6 +75,9 @@ fun C3_2_ThemeFragmentSample() {
         Spacer(modifier = Modifier.height(12.dp))
 
         StaticOrNotCompositionLocalDiffSample2()
+        Spacer(modifier = Modifier.height(12.dp))
+
+        TypographySample()
         Spacer(modifier = Modifier.height(12.dp))
     }
 }
@@ -192,5 +198,18 @@ fun TaggedBox(tag: String, size: Dp, background: Color, content: @Composable () 
         ) {
             content()
         }
+    }
+}
+
+@Composable
+fun TypographySample() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .height(50.dp)
+    ) {
+        Text("Title1 Style", style = title1)
+        Text("Title2 Style", style = title2)
+        Text("Body1 Style", style = body1)
     }
 }
